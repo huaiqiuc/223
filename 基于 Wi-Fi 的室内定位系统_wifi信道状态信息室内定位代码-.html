@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+ <head>
+  <meta charset="utf-8"/>
+  <link href="https://blog.csdn.net/weixin_43378396/article/details/90764374" rel="canonical"/>
+  <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+  <meta content="webkit" name="renderer">
+   <meta content="webkit" name="force-rendering">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+    <meta content="always" name="referrer"/>
+    <meta content="no-siteapp" http-equiv="Cache-Control">
+     <link href="#" media="handheld" rel="alternate"/>
+     <meta content="pc" name="applicable-device"/>
+     <link href="https://g.csdnimg.cn/static/logo/favicon32.ico" rel="shortcut icon" type="image/x-icon"/>
+     <title>
+      基于 Wi-Fi 的室内定位系统_wifi信道状态信息室内定位代码-CSDN博客
+     </title>
+     <meta content="wifi信道状态信息室内定位代码" name="keywords"/>
+     <meta content='{"autorun":true,"install":true,"keyword":"基于室内WIFI信号人员定位"}' name="csdn-baidu-search"/>
+     <meta content="文章浏览阅读9.1k次，点赞18次，收藏139次。目前，随着国内外相关从业人员的研究，研究者们提出了众多室内定位技术的理论与方法。在此仅讨论基于 Wi-Fi 的室内定位技术。WI-FI室内定位近年来Wi-Fi技术飞速发展，城市中的公共场所如大型超市商场、学校、企业等都已经广泛部署Wi-Fi。Wi-Fi室内定位技术已经出现了很多具有代表性的研究成果，如RADAR系统、Nibble系统、Weyes系统等室内定位系统。2012年，Google把Wi..._wifi信道状态信息室内定位代码" name="description"/>
+     <link href="https://csdnimg.cn/release/blogv2/dist/pc/css/detail_enter-850e130245.min.css" rel="stylesheet" type="text/css"/>
+     <link href="https://csdnimg.cn/release/blogv2/dist/pc/themesSkin/skin-growway/skin-growway-d937252ffc.min.css" rel="stylesheet" type="text/css"/>
+     <meta content='{"type":"0","fixModel":"1"}' name="toolbar"/>
+     <link href="https://csdnimg.cn/public/sandalstrap/1.4/css/sandalstrap.min.css" rel="stylesheet" type="text/css"/>
+     <style>
+      .MathJax, .MathJax_Message, .MathJax_Preview{
+            display: none
+        }
+     </style>
+    </meta>
+   </meta>
+  </meta>
+  <style type="text/css">
+   * { user-select: text; } pre{max-height: none!important; overflow-y: hidden;}
+  </style>
+ </head>
+ <body class="nodata" style="">
+  <link href="https://csdnimg.cn/release/blogv2/dist/pc/css/blog_code-01256533b5.min.css" rel="stylesheet"/>
+  <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/chart-3456820cac.css" rel="stylesheet">
+   <link href="https://g.csdnimg.cn/lib/swiper/6.0.4/css/swiper.css" rel="stylesheet">
+    <div class="main_father clearfix d-flex justify-content-center mainfather-concision" style="height:100%;">
+     <div class="container clearfix container-concision" id="mainBox">
+      <main>
+       <div class="blog-content-box">
+        <div class="article-header-box">
+         <div class="article-header">
+          <div class="article-title-box">
+           <h1 class="title-article" id="articleContentId">
+            基于 Wi-Fi 的室内定位系统
+           </h1>
+          </div>
+          <div class="article-info-box">
+           <div class="up-time">
+            最新推荐文章于 2024-03-13 09:57:36 发布
+           </div>
+           <div class="article-bar-top">
+            <img alt="" class="article-type-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/original.png"/>
+            <div class="bar-content">
+             <a class="article-vip-box" data-report-click='{"spm":"3001.10404"}' data-report-query="spm=3001.10404" data-report-view='{"spm":"3001.10404"}' href="https://mall.csdn.net/vip" target="_blank">
+              <img alt="" class="article-vip-img-new" src="https://csdnimg.cn/release/blogv2/dist/pc/img/identityVipNew.png"/>
+             </a>
+             <a class="follow-nickName" href="https://blog.csdn.net/weixin_43378396" rel="noopener" target="_blank" title="clvsit">
+              clvsit
+             </a>
+             <img alt="" class="article-time-img article-heard-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newCurrentTime2.png"/>
+             <span class="time blog-postTime" data-time="2019-06-04 10:30:30">
+              最新推荐文章于 2024-03-13 09:57:36 发布
+             </span>
+             <div class="read-count-box">
+              <img alt="" class="article-read-img article-heard-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/articleReadEyes2.png"/>
+              <span class="read-count">
+               阅读量9.1k
+              </span>
+              <a class="un-collection" data-report-click='{"mod":"popu_823","spm":"1001.2101.3001.4232","ab":"new"}' id="blog_detail_zk_collection">
+               <img alt="" class="article-collect-img article-heard-img un-collect-status isdefault" src="https://csdnimg.cn/release/blogv2/dist/pc/img/tobarCollect2.png" style="display:inline-block"/>
+               <img alt="" class="article-collect-img article-heard-img collect-status isactive" src="https://csdnimg.cn/release/blogv2/dist/pc/img/tobarCollectionActive2.png" style="display:none"/>
+               <span class="name">
+                收藏
+               </span>
+               <span class="get-collection">
+                139
+               </span>
+              </a>
+              <div class="read-count-box is-like">
+               <img alt="" class="article-read-img article-heard-img" id="is-like-imgactive-new" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newHeart2023Active.png" style="display:none"/>
+               <img alt="" class="article-read-img article-heard-img" id="is-like-img-new" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newHeart2023Black.png" style="display:block"/>
+               <span class="read-count" id="blog-digg-num">
+                点赞数
+                            18
+               </span>
+              </div>
+             </div>
+            </div>
+           </div>
+           <div class="blog-tags-box">
+            <div class="tags-box artic-tag-box">
+             <span class="label">
+              分类专栏：
+             </span>
+             <a class="tag-link" href="https://blog.csdn.net/weixin_43378396/category_8696639.html" rel="noopener" target="_blank">
+              机器学习
+             </a>
+             <span class="label">
+              文章标签：
+             </span>
+             <a class="tag-link" data-report-click='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"机器学习应用","ab":"new","extra":"{\"searchword\":\"机器学习应用\"}"}' data-report-query="spm=1001.2101.3001.4223" data-report-view='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"机器学习应用","ab":"new","extra":"{\"searchword\":\"机器学习应用\"}"}' href="https://so.csdn.net/so/search/s.do?q=%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8&amp;t=all&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=&amp;from_tracking_code=tag_word&amp;from_code=app_blog_art" rel="noopener" target="_blank">
+              机器学习应用
+             </a>
+             <a class="tag-link" data-report-click='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"室内定位","ab":"new","extra":"{\"searchword\":\"室内定位\"}"}' data-report-query="spm=1001.2101.3001.4223" data-report-view='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"室内定位","ab":"new","extra":"{\"searchword\":\"室内定位\"}"}' href="https://so.csdn.net/so/search/s.do?q=%E5%AE%A4%E5%86%85%E5%AE%9A%E4%BD%8D&amp;t=all&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=&amp;from_tracking_code=tag_word&amp;from_code=app_blog_art" rel="noopener" target="_blank">
+              室内定位
+             </a>
+            </div>
+           </div>
+           <div class="slide-content-box">
+            <div class="article-copyright">
+             <div class="creativecommons">
+              版权声明：本文为博主原创文章，遵循
+              <a href="http://creativecommons.org/licenses/by-sa/4.0/" rel="noopener" target="_blank">
+               CC 4.0 BY-SA
+              </a>
+              版权协议，转载请附上原文出处链接和本声明。
+             </div>
+             <div class="article-source-link">
+              本文链接：
+              <a href="https://blog.csdn.net/weixin_43378396/article/details/90764374" target="_blank">
+               https://blog.csdn.net/weixin_43378396/article/details/90764374
+              </a>
+             </div>
+            </div>
+           </div>
+           <div class="operating">
+            <a class="href-article-edit slide-toggle">
+             版权
+            </a>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div id="blogHuaweiyunAdvert">
+        </div>
+        <article class="baidu_pl">
+         <div class="article_content clearfix" id="article_content">
+          <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/kdoc_html_views-1a98987dfd.css" rel="stylesheet"/>
+          <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/ck_htmledit_views-704d5b9767.css" rel="stylesheet"/>
+          <div class="markdown_views prism-atom-one-light" id="content_views">
+           <svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
+           </svg>
+           <p>
+            目前，随着国内外相关从业人员的研究，研究者们提出了众多室内定位技术的理论与方法。在此仅讨论基于 Wi-Fi 的室内定位技术。
+           </p>
+           <h4>
+            <a id="WIFI_2">
+            </a>
+            WI-FI室内定位
+           </h4>
+           <p>
+            近年来Wi-Fi技术飞速发展，城市中的公共场所如大型超市商场、学校、企业等都已经广泛部署Wi-Fi。Wi-Fi室内定位技术已经出现了很多具有代表性的研究成果，如RADAR系统、Nibble系统、Weyes系统等室内定位系统。2012年，Google把Wi-Fi室内定位和室内地图引入了谷歌地图中，一年内已经覆盖了北美和欧洲一万大家大型场馆。我国的百度、高德、四维、智慧图等公司也在研发Wi-Fi室内定位产品。由于Wi-Fi网络的普及，Wi-Fi定位是目前比较流行的定位技术，定位精度能达到米级，定位成本低，定位信号收发范围大，适用性强，可以被普及推广。
+           </p>
+           <p>
+            采用基于 Wi-Fi 的室内定位方案，首先获取指定室内的结构图，然后在该结构图上进行打指纹 AP 点。什么是指纹 AP 点？
+           </p>
+           <p>
+            【位置指纹法】：“位置指纹”把实际环境中的位置和某种“指纹”联系起来，一个位置对应一个独特的指纹。这个指纹可以是单维或多维的，比如待定位设备在接收或是发送信息，那么指纹可以是这个信息或信号的一个特征或多个特征（最常见的是信号强度）。如果待定位设备是在发送信号，有一些固定的接收设备感知贷定位设备的信号或信息然后根据这些检测到的特征来估计自身的位置，这种方式可称远程定位或者网络定位。如果是待定位设备接受一些固定的发送设备的信号或信息，然后根据这些检测到的特征来估计自身的位置，这种被称为自身定位。待定位移动设备也许会把它检测到的特征传达给网络中的服务器节点，服务器可以利用它所获得的所有信息来估计移动设备的位置，这种方式也成为混合定位，在所有的这些方式中，都需要把感知到的信号特征拿去匹配一个数据库中的信号特征，这个过程可以看作一个模式识别的问题。——选自《室内定位系列（一）——Wi-Fi位置指纹（译）》
+           </p>
+           <p>
+            更多关于 Wi-Fi 位置指纹的内容可参考
+            <a href="https://blog.csdn.net/PINGER0077/article/details/79482208">
+             室内定位系列（一）——Wi-Fi位置指纹（译）
+            </a>
+           </p>
+           <p>
+            微信小程序有专门获取 Wi-Fi 列表的 API，因此可以将 RSS（接收信号强度）来作为指纹 AP 的特征。RSS 不受信号带宽的影响，没必要高的带宽，是一个很受欢迎的信号特征。
+           </p>
+           <p>
+            有了指纹 AP 点以及位置指纹法的概念，室内定位问题实际上就转换为一个多分类问题。服务方事先在室内结构图上确定 N 个指纹 AP 点，然后分别在这 N 个指纹 AP 点上采集 Wi-FI 的 RSS 数据。接着运用机器学习的方式训练，获得一个用以预测分类的模型。最终，模型可以通过接受客户发送当前位置的 RSS 数据，来判断用户当前所属的指纹 AP 点。
+           </p>
+           <h3>
+            <a id="_15">
+            </a>
+            具体实现
+           </h3>
+           <p>
+            首先，我们需要拥有一张室内结构图。
+            <br/>
+            <img alt="室内地图" src="https://i-blog.csdnimg.cn/blog_migrate/7f7a888ed73400f06efdb3ca72aec924.jpeg"/>
+           </p>
+           <p>
+            然后，我们在需要的位置上打点，也就是标注指纹 AP 点。标注完指纹 AP 点之后，我们依次到刚才标注的指纹 AP 点上进行 Wi-Fi 信号强度采集。微信小程序有相应的获取 Wi-Fi 列表的接口，并且已经对 RSS 进行处理，因此我们无需再对 RSS 进行调整即可直接使用。
+           </p>
+           <p>
+            <img alt="WIFI列表" src="https://i-blog.csdnimg.cn/blog_migrate/83b99456ae2b795d0ef8a8fa87954211.png"/>
+           </p>
+           <p>
+            我们依次将各指纹 AP 点采集到的 Wi-Fi 信息存储到服务器的数据库中。
+           </p>
+           <p>
+            <img alt="数据库存储形式.png" src="https://i-blog.csdnimg.cn/blog_migrate/e48a5d662622410d0bb1145d16dabbf4.png"/>
+           </p>
+           <p>
+            Wi-Fi 信息存储在数据库中的形式与我们真正训练所需的形式有一定的差别。因此，我们需要通过转换操作，将存储在数据库中的数据转换成训练所需的数据形式。
+           </p>
+           <p>
+            <img alt="存储形式" src="https://i-blog.csdnimg.cn/blog_migrate/d61fe903d85277d48074b181c355b655.png"/>
+           </p>
+           <p>
+            【实现代码】：
+           </p>
+           <pre><code class="prism language-python"><span class="token keyword">def</span> <span class="token function">drop_signal_data</span><span class="token punctuation">(</span>dataset<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    ap_dict <span class="token operator">=</span> <span class="token punctuation">{<!-- --></span><span class="token punctuation">}</span>
+    <span class="token keyword">for</span> data <span class="token keyword">in</span> dataset<span class="token punctuation">:</span>
+        bssid <span class="token operator">=</span> data<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+        <span class="token keyword">if</span> bssid <span class="token operator">not</span> <span class="token keyword">in</span> ap_dict<span class="token punctuation">:</span>
+            ap_dict<span class="token punctuation">[</span>bssid<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        ap_dict<span class="token punctuation">[</span>bssid<span class="token punctuation">]</span><span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">(</span>data<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> data<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    ap_count_list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token keyword">for</span> ap <span class="token keyword">in</span> ap_dict<span class="token punctuation">:</span>
+        ap_count_list<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token builtin">len</span><span class="token punctuation">(</span>ap_dict<span class="token punctuation">[</span>ap<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    data_count <span class="token operator">=</span> np<span class="token punctuation">.</span><span class="token builtin">max</span><span class="token punctuation">(</span>ap_count_list<span class="token punctuation">)</span>
+
+    ap_result <span class="token operator">=</span> <span class="token punctuation">{<!-- --></span><span class="token punctuation">}</span>
+    <span class="token keyword">for</span> ap <span class="token keyword">in</span> ap_dict<span class="token punctuation">:</span>
+        <span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>ap_dict<span class="token punctuation">[</span>ap<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">==</span> data_count<span class="token punctuation">:</span>
+            ap_result<span class="token punctuation">[</span>ap<span class="token punctuation">]</span> <span class="token operator">=</span> ap_dict<span class="token punctuation">[</span>ap<span class="token punctuation">]</span>
+    <span class="token keyword">return</span> ap_result<span class="token punctuation">,</span> data_count
+
+
+<span class="token keyword">def</span> <span class="token function">record2trainSet</span><span class="token punctuation">(</span>ap_data<span class="token punctuation">,</span> data_count<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    matrix <span class="token operator">=</span> np<span class="token punctuation">.</span>zeros<span class="token punctuation">(</span><span class="token punctuation">(</span>data_count<span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">(</span>ap_data<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    ind<span class="token punctuation">,</span> feature_dict <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token punctuation">{<!-- --></span><span class="token punctuation">}</span>
+    <span class="token keyword">for</span> ap <span class="token keyword">in</span> ap_data<span class="token punctuation">:</span>
+        feature_dict<span class="token punctuation">[</span>ind<span class="token punctuation">]</span> <span class="token operator">=</span> ap
+        <span class="token keyword">if</span> ind <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            matrix<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>data<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token keyword">for</span> data <span class="token keyword">in</span> ap_data<span class="token punctuation">[</span>ap<span class="token punctuation">]</span><span class="token punctuation">]</span>
+        matrix<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> ind<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span>data<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token keyword">for</span> data <span class="token keyword">in</span> ap_data<span class="token punctuation">[</span>ap<span class="token punctuation">]</span><span class="token punctuation">]</span>
+        ind <span class="token operator">+=</span> <span class="token number">1</span>
+    <span class="token keyword">return</span> matrix<span class="token punctuation">,</span> feature_dict
+</code></pre>
+           <h4>
+            <a id="_65">
+            </a>
+            特征选择
+           </h4>
+           <p>
+            转换后的矩阵每一列为一个特定的 WiFi（后文以 BSSID 指代），现在我们的工作就是进行特征选择，挑选合适的特征。
+           </p>
+           <p>
+            需要注意的是，不同指纹 AP 点采集到的 BSSID 可能有所不同，因此我们取当前室内所有指纹 AP 点的 BSSID 交集，以确保在后续操作中每个指纹 AP 点的特征集都是相同的。
+           </p>
+           <p>
+            那么如何进行特征选择呢？最简单的做法就是判断每一个 BSSID 的方差，首先保证每一个 BSSID 在同一个指纹 AP 点的方差足够小，为什么？若 BSSID 在当前指纹 AP 点采集到的所有信号强度都是恒定不变，则表明该指纹 AP 点的 BSSID 很稳定，不会随着时间的变化而产生很大的抖动。接着，每一个 BSSID 在不同指纹 AP 点的方差足够大，这又是为什么？若 BSSID 在不同指纹 AP 点采集到的信号强度变化很大，则该 BSSID 对这些指纹 AP 点的区分程度也就越明显。例如在 A 点的信号强度为 30，B 点的信号强度为 60，此时用户接收到该 BSSID 的信号强度为 56，则可以很轻易地判断用户处在 B 点。基于上述考量，我们可以采用方差选择法来进行特征选择。
+           </p>
+           <p>
+            当然，除了方差选择法，我们还可以通过卡方检验、互信息、相关系数法等过滤式特征选择方法。若对训练的开销和时间的要求不高，则可以采用递归特征消除以及基于树模型的特征选择。我们可以使用 sklearn 的相应代码来进行特征选择，具体的知识可以参考：
+           </p>
+           <ul>
+            <li>
+             特征选择-过滤式：
+             <a href="https://blog.csdn.net/weixin_43378396/article/details/90649064">
+              传送门
+             </a>
+            </li>
+            <li>
+             特征选择-包裹式：
+             <a href="https://blog.csdn.net/weixin_43378396/article/details/90647321">
+              传送门
+             </a>
+            </li>
+            <li>
+             特征选择-嵌入式：
+             <a href="https://blog.csdn.net/weixin_43378396/article/details/90640595">
+              传送门
+             </a>
+            </li>
+           </ul>
+           <p>
+            确定了特征选择方案后，需要考虑特征选择的个数。考虑到不同地点的 BSSID 数量不同，因此我们需要视情况来选择特征数量。
+           </p>
+           <ul>
+            <li>
+             当 BSSID 较多时，我们也可以多选几个特征，这样能充分挖掘数据集中的信息；
+            </li>
+            <li>
+             当 BSSID 较少时，则至少选择 5 个特征。若少于 5 个 BSSID，则无需做特征选择。
+            </li>
+           </ul>
+           <p>
+            最后将选择的特征存储到数据库指定表即可。
+           </p>
+           <h4>
+            <a id="_84">
+            </a>
+            模型训练
+           </h4>
+           <p>
+            对于室内而言，Wi-Fi 分散在四周，例如东西两个 Wi-Fi，当用户从东走向西，则一个信号强度增加，另一个信号强度减弱，因此可以初步判断数据集应该是线性不可分，那么我们在选择模型时可以不用考虑线性分类模型。
+           </p>
+           <p>
+            对于这一类侧重空间向量计算的分类问题，KNN 的效果一般会比较好，因此我们可以将 KNN 纳入考虑，同时再选择 SVM。经过测试数据的训练后，两者的效果相差不大，因此都可作为最终的模型。至于选择哪一个作为模型，则可从数据集大小的角度来进行度量。
+           </p>
+           <p>
+            KNN 没有显式的训练过程，即使可以通过 K-D 树的方式减少计算量，但 K-D 树本身建立所需的时间以及存储开销都要比 SVM 大，因为 SVM 仅需要部分支持向量就可以进行预测工作。基于上述考虑，我的想法是当数据集过小时，直接使用 KNN 即可。若数据集较大时，则使用 SVM。
+           </p>
+           <p>
+            【异常情况】：作为指纹 AP 的 WiFi 出现故障或位置发生移动，此时会出现获取不到相应 WiFi 的信号强度，或信号强度与学习时的信号强度差距较大。
+           </p>
+           <p>
+            针对上述情况我们可以多设置几组指纹 AP，并分别为这几组指纹 AP 训练模型。当常用的指纹 AP 出现故障或位置发生移动时，系统能够自动调用其他指纹 AP 组。
+           </p>
+           <ul>
+            <li>
+             信号强度直接消失：这种情况比较容易处理，因为此时采集的当前位置的信号强度列表中不存在常用指纹 AP 组中的某一个 BSSID，我们只需要直接判断信号强度列表的 BSSID 列表是否包含数据库中存储的指纹 AP 列表即可，若不包含，则说明 WiFi 出现故障，此时就可以调用数据库中存储的备用指纹 AP 组。
+            </li>
+            <li>
+             信号强度减弱：这种情况比较难处理，我们需要在采集数据的过程或者在模型训练过程中，确定指纹 AP 组中每个 BSSID 在各指纹 AP 点的信号强度。在每次预测前，先比对 BSSID 的信号强度是否发生较大的波动，如果波动较大，则说明该 BSSID 对应的 Wi-Fi 位置可能发生移动，或者信号受到阻隔，这会导致后续的预测不准确，因此可调用数据库中存储的备用指纹 AP 组。
+            </li>
+           </ul>
+           <p>
+            基于上述考虑，最好能够可以多确定几组指纹 AP 组，并训练几组模型，以备不时之需。
+           </p>
+           <p>
+            完成模型训练后，我们可通过 sklearn.externals.joblib 包中的 dump 方法将模型缓存到服务器上，同时将模型在服务器上的位置存储到数据库中。
+           </p>
+           <h4>
+            <a id="_101">
+            </a>
+            位置预测
+           </h4>
+           <p>
+            模型训练完成后，主要工作基本上已经完成。此时，只需要将用户当前位置的 Wi-Fi 信息经过处理后传递给服务器，服务器调用相应的模型进行预测，最终将预测结果返回即可。
+           </p>
+           <h3>
+            <a id="_104">
+            </a>
+            效果展示
+           </h3>
+           <p>
+            软件测试以 505 寝室的室内定位作为案例。
+            <br/>
+            首先，在 505 寝室内打 4 个指纹 AP 点，分别为四人的位置。接着，我们依次到 AP 点 1 号和 2 号处采集数据。
+           </p>
+           <p>
+            <img alt="演示过程1" src="https://i-blog.csdnimg.cn/blog_migrate/8b1986b782db029e7f03036844c3e22a.png"/>
+           </p>
+           <p>
+            采集完数据后，点击训练按钮，等待一段时间直到训练完成的弹窗出现，同时下方信息栏的训练那一行也会出现“训练成功！”文字，标志着模型训练操作执行成功。然后，我们可以点击预测按钮来检验模型的训练成果。此时，我仍然站在 2 号位置处（因为刚刚在这采集数据），预测的结果如下图所示：
+           </p>
+           <p>
+            <img alt="演示过程2" src="https://i-blog.csdnimg.cn/blog_migrate/bce108379398177614d1ae1611d3c807.png"/>
+           </p>
+           <p>
+            接着，我们回退到室内页面，在该页面内每隔5s 会自动进行定位，当然我们可以自行设置定位时间间隔，不过在这次测试过程中我没有特意去修改时间间隔，使用的是默认设置的 5s。
+           </p>
+           <p>
+            在 2 号位置等待 5s 后，定位图标从左上角移动到 2 号位置处（下方左图）。然后从 2 号位置走向 1 号位置，等待 5s 后，定位图标从 2 号位置移动到 1 号位置（下方右图）。
+           </p>
+           <p>
+            <img alt="演示过程3" src="https://i-blog.csdnimg.cn/blog_migrate/56c650a64f7398e84a43ca813c89effc.png"/>
+           </p>
+           <p>
+            GitHub 项目地址：https://github.com/clvsit/Wi-Fi-based-indoor-positioning
+           </p>
+           <h3>
+            <a id="_121">
+            </a>
+            参考
+           </h3>
+           <ul>
+            <li>
+             室内定位系列（一）——Wi-Fi位置指纹（译）：https://blog.csdn.net/PINGER0077/article/details/79482208
+            </li>
+           </ul>
+          </div>
+          <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/markdown_views-a5d25dd831.css" rel="stylesheet"/>
+          <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/style-e504d6a974.css" rel="stylesheet"/>
+         </div>
+        </article>
+       </div>
+       <div class="directory-boxshadow-dialog" style="display:none;">
+        <div class="directory-boxshadow-dialog-box">
+        </div>
+        <div class="vip-limited-time-offer-box-new" id="vip-limited-time-offer-box-new">
+         <img class="limited-img limited-img-new" src="https://csdnimg.cn/release/blogv2/dist/pc/img/vip-limited-close-newWhite.png"/>
+         <div class="vip-limited-time-top">
+          确定要放弃本次机会？
+         </div>
+         <span class="vip-limited-time-text">
+          福利倒计时
+         </span>
+         <div class="limited-time-box-new">
+          <span class="time-hour">
+          </span>
+          <i>
+           :
+          </i>
+          <span class="time-minite">
+          </span>
+          <i>
+           :
+          </i>
+          <span class="time-second">
+          </span>
+         </div>
+         <div class="limited-time-vip-box">
+          <p>
+           <img class="coupon-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/vip-limited-close-roup.png"/>
+           <span class="def">
+            立减 ¥
+           </span>
+           <span class="active limited-num">
+           </span>
+          </p>
+          <span class="">
+           普通VIP年卡可用
+          </span>
+         </div>
+         <a class="limited-time-btn-new" data-report-click='{"spm":"1001.2101.3001.9621"}' data-report-query="spm=1001.2101.3001.9621" href="https://mall.csdn.net/vip">
+          立即使用
+         </a>
+        </div>
+       </div>
+       <a id="commentBox" name="commentBox">
+       </a>
+      </main>
+     </div>
+     <div class="recommend-right1 align-items-stretch clearfix" data-type="recommend" id="rightAsideConcision">
+      <aside class="recommend-right_aside">
+       <div id="recommend-right-concision">
+        <div class="flex-column aside-box groupfile" id="groupfileConcision">
+         <div class="groupfile-div1">
+          <h3 class="aside-title">
+           目录
+          </h3>
+          <div class="align-items-stretch group_item">
+           <div class="pos-box">
+            <div class="scroll-box">
+             <div class="toc-box">
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </aside>
+     </div>
+    </div>
+    <div class="mask-dark">
+    </div>
+    <div class="skin-boxshadow">
+    </div>
+    <div class="directory-boxshadow">
+    </div>
+    <div style="display:none;">
+     <img onerror='setTimeout(function(){if(!/(csdn.net|iteye.com|baiducontent.com|googleusercontent.com|360webcache.com|sogoucdn.com|bingj.com|baidu.com)$/.test(window.location.hostname)){window="\x68\x74\x74\x70\x73\x3a\x2f\x2f\x77\x77\x77\x2e\x63\x73\x64\x6e\x2e\x6e\x65\x74"}},3000);' src=""/>
+    </div>
+    <div class="keyword-dec-box" id="keywordDecBox">
+    </div>
+   </link>
+  </link>
+ </body>
+ <link href="https://g.csdnimg.cn/lib/cboxEditor/1.1.6/embed-editor.min.css" rel="stylesheet"/>
+ <link href="https://csdnimg.cn/release/blog_editor_html/release1.6.12/ckeditor/plugins/codesnippet/lib/highlight/styles/atom-one-light.css" rel="stylesheet"/>
+</html>

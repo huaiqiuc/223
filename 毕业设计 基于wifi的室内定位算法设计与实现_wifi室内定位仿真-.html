@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+ <head>
+  <meta charset="utf-8"/>
+  <link href="https://blog.csdn.net/mabile123444/article/details/141499278" rel="canonical"/>
+  <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+  <meta content="webkit" name="renderer">
+   <meta content="webkit" name="force-rendering">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+    <meta content="always" name="referrer"/>
+    <meta content="no-siteapp" http-equiv="Cache-Control">
+     <link href="#" media="handheld" rel="alternate"/>
+     <meta content="pc" name="applicable-device"/>
+     <link href="https://g.csdnimg.cn/static/logo/favicon32.ico" rel="shortcut icon" type="image/x-icon"/>
+     <title>
+      毕业设计 基于wifi的室内定位算法设计与实现_wifi室内定位仿真-CSDN博客
+     </title>
+     <meta content="wifi室内定位仿真" name="keywords"/>
+     <meta content='{"autorun":true,"install":true,"keyword":"基于室内WIFI信号人员定位"}' name="csdn-baidu-search"/>
+     <meta content="文章浏览阅读955次，点赞18次，收藏12次。🔥今天学长向大家分享一个毕业设计项目🚩毕业设计 wifi室内定位系统🥇学长这里给一个题目综合评分(每项满分5分)难度系数：3分工作量：3分创新点：4分毕业设计 wifi室内定位算法实现🧿 项目分享:见文末!今天来介绍一下室内定位相关的原理以及实现方法;WIFI全称WirelessFidelity，在中文里又称作“行动热点”，是Wi-Fi联盟制造商的商标做为产品的品牌认证，是一个创建于IEEE 802.11标准的无线局域网技术。_wifi室内定位仿真" name="description"/>
+     <link href="https://csdnimg.cn/release/blogv2/dist/pc/css/detail_enter-850e130245.min.css" rel="stylesheet" type="text/css"/>
+     <link href="https://csdnimg.cn/release/blogv2/dist/pc/themesSkin/skin-yellow/skin-yellow-28d34ab5fa.min.css" rel="stylesheet" type="text/css"/>
+     <meta content='{"type":"0","fixModel":"1"}' name="toolbar"/>
+     <link href="https://csdnimg.cn/public/sandalstrap/1.4/css/sandalstrap.min.css" rel="stylesheet" type="text/css"/>
+     <style>
+      .MathJax, .MathJax_Message, .MathJax_Preview{
+            display: none
+        }
+     </style>
+    </meta>
+   </meta>
+  </meta>
+  <style type="text/css">
+   * { user-select: text; } pre{max-height: none!important; overflow-y: hidden;}
+  </style>
+ </head>
+ <body class="nodata" style="">
+  <link href="https://csdnimg.cn/release/blogv2/dist/pc/css/blog_code-01256533b5.min.css" rel="stylesheet"/>
+  <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/chart-3456820cac.css" rel="stylesheet">
+   <link href="https://g.csdnimg.cn/lib/swiper/6.0.4/css/swiper.css" rel="stylesheet">
+    <div class="main_father clearfix d-flex justify-content-center mainfather-concision" style="height:100%;">
+     <div class="container clearfix container-concision" id="mainBox">
+      <main>
+       <div class="blog-content-box">
+        <div class="article-header-box">
+         <div class="article-header">
+          <div class="article-title-box">
+           <h1 class="title-article" id="articleContentId">
+            毕业设计 基于wifi的室内定位算法设计与实现
+           </h1>
+          </div>
+          <div class="article-info-box">
+           <div class="article-bar-top">
+            <img alt="" class="article-type-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/original.png"/>
+            <div class="bar-content">
+             <a class="article-vip-box" data-report-click='{"spm":"3001.10404"}' data-report-query="spm=3001.10404" data-report-view='{"spm":"3001.10404"}' href="https://mall.csdn.net/vip" target="_blank">
+              <img alt="" class="article-vip-img-new" src="https://csdnimg.cn/release/blogv2/dist/pc/img/identityVipNew.png"/>
+             </a>
+             <a class="follow-nickName" href="https://blog.csdn.net/mabile123444" rel="noopener" target="_blank" title="A毕设分享家">
+              A毕设分享家
+             </a>
+             <img alt="" class="article-time-img article-heard-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newCurrentTime2.png"/>
+             <span class="time">
+              于 2024-08-24 14:33:32 发布
+             </span>
+             <div class="read-count-box">
+              <img alt="" class="article-read-img article-heard-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/articleReadEyes2.png"/>
+              <span class="read-count">
+               阅读量955
+              </span>
+              <a class="un-collection" data-report-click='{"mod":"popu_823","spm":"1001.2101.3001.4232","ab":"new"}' id="blog_detail_zk_collection">
+               <img alt="" class="article-collect-img article-heard-img un-collect-status isdefault" src="https://csdnimg.cn/release/blogv2/dist/pc/img/tobarCollect2.png" style="display:inline-block"/>
+               <img alt="" class="article-collect-img article-heard-img collect-status isactive" src="https://csdnimg.cn/release/blogv2/dist/pc/img/tobarCollectionActive2.png" style="display:none"/>
+               <span class="name">
+                收藏
+               </span>
+               <span class="get-collection">
+                12
+               </span>
+              </a>
+              <div class="read-count-box is-like">
+               <img alt="" class="article-read-img article-heard-img" id="is-like-imgactive-new" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newHeart2023Active.png" style="display:none"/>
+               <img alt="" class="article-read-img article-heard-img" id="is-like-img-new" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newHeart2023Black.png" style="display:block"/>
+               <span class="read-count" id="blog-digg-num">
+                点赞数
+                            18
+               </span>
+              </div>
+             </div>
+            </div>
+           </div>
+           <div class="blog-tags-box">
+            <div class="tags-box artic-tag-box">
+             <span class="label">
+              文章标签：
+             </span>
+             <a class="tag-link" data-report-click='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"算法","ab":"new","extra":"{\"searchword\":\"算法\"}"}' data-report-query="spm=1001.2101.3001.4223" data-report-view='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"算法","ab":"new","extra":"{\"searchword\":\"算法\"}"}' href="https://so.csdn.net/so/search/s.do?q=%E7%AE%97%E6%B3%95&amp;t=all&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=&amp;from_tracking_code=tag_word&amp;from_code=app_blog_art" rel="noopener" target="_blank">
+              算法
+             </a>
+             <a class="tag-link" data-report-click='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"python","ab":"new","extra":"{\"searchword\":\"python\"}"}' data-report-query="spm=1001.2101.3001.4223" data-report-view='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"python","ab":"new","extra":"{\"searchword\":\"python\"}"}' href="https://so.csdn.net/so/search/s.do?q=python&amp;t=all&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=&amp;from_tracking_code=tag_word&amp;from_code=app_blog_art" rel="noopener" target="_blank">
+              python
+             </a>
+             <a class="tag-link" data-report-click='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"毕业设计","ab":"new","extra":"{\"searchword\":\"毕业设计\"}"}' data-report-query="spm=1001.2101.3001.4223" data-report-view='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"毕业设计","ab":"new","extra":"{\"searchword\":\"毕业设计\"}"}' href="https://so.csdn.net/so/search/s.do?q=%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1&amp;t=all&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=&amp;from_tracking_code=tag_word&amp;from_code=app_blog_art" rel="noopener" target="_blank">
+              毕业设计
+             </a>
+             <a class="tag-link" data-report-click='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"毕设","ab":"new","extra":"{\"searchword\":\"毕设\"}"}' data-report-query="spm=1001.2101.3001.4223" data-report-view='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"毕设","ab":"new","extra":"{\"searchword\":\"毕设\"}"}' href="https://so.csdn.net/so/search/s.do?q=%E6%AF%95%E8%AE%BE&amp;t=all&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=&amp;from_tracking_code=tag_word&amp;from_code=app_blog_art" rel="noopener" target="_blank">
+              毕设
+             </a>
+             <a class="tag-link" data-report-click='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"大数据","ab":"new","extra":"{\"searchword\":\"大数据\"}"}' data-report-query="spm=1001.2101.3001.4223" data-report-view='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"大数据","ab":"new","extra":"{\"searchword\":\"大数据\"}"}' href="https://so.csdn.net/so/search/s.do?q=%E5%A4%A7%E6%95%B0%E6%8D%AE&amp;t=all&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=&amp;from_tracking_code=tag_word&amp;from_code=app_blog_art" rel="noopener" target="_blank">
+              大数据
+             </a>
+            </div>
+           </div>
+           <div class="slide-content-box">
+            <div class="article-copyright">
+             <div class="creativecommons">
+              版权声明：本文为博主原创文章，遵循
+              <a href="http://creativecommons.org/licenses/by-sa/4.0/" rel="noopener" target="_blank">
+               CC 4.0 BY-SA
+              </a>
+              版权协议，转载请附上原文出处链接和本声明。
+             </div>
+             <div class="article-source-link">
+              本文链接：
+              <a href="https://blog.csdn.net/mabile123444/article/details/141499278" target="_blank">
+               https://blog.csdn.net/mabile123444/article/details/141499278
+              </a>
+             </div>
+            </div>
+           </div>
+           <div class="operating">
+            <a class="href-article-edit slide-toggle">
+             版权
+            </a>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div id="blogHuaweiyunAdvert">
+        </div>
+        <article class="baidu_pl">
+         <div class="article_content clearfix" id="article_content">
+          <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/kdoc_html_views-1a98987dfd.css" rel="stylesheet"/>
+          <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/ck_htmledit_views-704d5b9767.css" rel="stylesheet"/>
+          <div class="markdown_views prism-atom-one-light" id="content_views">
+           <svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
+           </svg>
+           <p>
+           </p>
+           <div class="toc">
+            <h4>
+             文章目录
+            </h4>
+            <ul>
+             <li>
+              <a href="#0__4" rel="nofollow">
+               0 前言
+              </a>
+             </li>
+             <li>
+              <a href="#_28" rel="nofollow">
+               简介
+              </a>
+             </li>
+             <li>
+              <ul>
+               <li>
+                <a href="#wifi_36" rel="nofollow">
+                 wifi定位背景和意义
+                </a>
+               </li>
+               <li>
+                <a href="#_41" rel="nofollow">
+                 基本原理
+                </a>
+               </li>
+               <li>
+                <ul>
+                 <li>
+                  <a href="#wifi_43" rel="nofollow">
+                   什么是wifi指纹
+                  </a>
+                 </li>
+                 <li>
+                  <a href="#wifi_46" rel="nofollow">
+                   wifi指纹由什么组成
+                  </a>
+                 </li>
+                </ul>
+               </li>
+               <li>
+                <a href="#wifi_51" rel="nofollow">
+                 wifi指纹定位实现方法
+                </a>
+               </li>
+               <li>
+                <ul>
+                 <li>
+                  <ul>
+                   <li>
+                    <ul>
+                     <li>
+                      <a href="#RSSI_56" rel="nofollow">
+                       不基于RSSI
+                      </a>
+                     </li>
+                     <li>
+                      <a href="#RSSI_61" rel="nofollow">
+                       基于RSSI
+                      </a>
+                     </li>
+                     <li>
+                      <a href="#_64" rel="nofollow">
+                       定位算法
+                      </a>
+                     </li>
+                     <li>
+                      <a href="#_80" rel="nofollow">
+                       基于无线信号的三边（三角定位）
+                      </a>
+                     </li>
+                    </ul>
+                   </li>
+                   <li>
+                    <a href="#_95" rel="nofollow">
+                     地图绘制
+                    </a>
+                   </li>
+                   <li>
+                    <ul>
+                     <li>
+                      <a href="#_96" rel="nofollow">
+                       数据采集点位置
+                      </a>
+                     </li>
+                     <li>
+                      <a href="#AP_99" rel="nofollow">
+                       AP点位置
+                      </a>
+                     </li>
+                    </ul>
+                   </li>
+                   <li>
+                    <a href="#_103" rel="nofollow">
+                     测试结果
+                    </a>
+                   </li>
+                  </ul>
+                 </li>
+                </ul>
+               </li>
+              </ul>
+             </li>
+             <li>
+              <a href="#_106" rel="nofollow">
+               算法实现效果
+              </a>
+             </li>
+             <li>
+              <a href="#_116" rel="nofollow">
+               最后
+              </a>
+             </li>
+            </ul>
+           </div>
+           <p>
+           </p>
+           <hr color="#000000" size='1"'/>
+           <h2>
+            <a id="0__4">
+            </a>
+            0 前言
+           </h2>
+           <p>
+            🔥
+            <strong>
+             今天学长向大家分享一个毕业设计项目
+            </strong>
+           </p>
+           <p>
+            🚩
+            <strong>
+             毕业设计 wifi室内定位系统
+            </strong>
+           </p>
+           <p>
+            🥇学长这里给一个题目综合评分(每项满分5分)
+           </p>
+           <ul>
+            <li>
+             难度系数：3分
+            </li>
+            <li>
+             工作量：3分
+            </li>
+            <li>
+             创新点：4分
+            </li>
+           </ul>
+           <p>
+            <strong>
+             项目运行效果：
+            </strong>
+           </p>
+           <p>
+           </p>
+           <div class="csdn-video-box" data-report-view='{"spm":"3001.10261","extra":{"id":"je04CcK1-1687619930970"}}'>
+            <iframe allowfullscreen="true" data-mediaembed="bilibili" frameborder="0" id="je04CcK1-1687619930970" src="https://player.bilibili.com/player.html?aid=230191408">
+            </iframe>
+            <p>
+             毕业设计 wifi室内定位算法实现
+            </p>
+           </div>
+           <p>
+           </p>
+           <p>
+            <strong>
+             🧿 项目分享:见文末!
+            </strong>
+           </p>
+           <h2>
+            <a id="_28">
+            </a>
+            简介
+           </h2>
+           <p>
+            今天来介绍一下室内定位相关的原理以及实现方法;
+           </p>
+           <p>
+            WIFI全称WirelessFidelity，在中文里又称作“行动热点”，是Wi-Fi联盟制造商的商标做为产品的品牌认证，是一个创建于IEEE 802.11标准的无线局域网技术。基于两套系统的密切相关，也常有人把Wi-Fi当做IEEE 802.11标准的同义术语。“Wi-Fi”常被写成“WiFi”或“Wifi”，但是它们并没有被Wi-Fi联盟认可。它的最大优点就是传输速度较高，可以达到11Mbps，另外它的有效距离也很长，同时也与已有的各种802.11 DSSS设备兼容。
+           </p>
+           <p>
+            wifi定位的本质实际上是基站式定位, 是依靠wifi AP以自身为中心, 向外辐射逐渐衰弱的指纹来进行定位的.
+           </p>
+           <h3>
+            <a id="wifi_36">
+            </a>
+            wifi定位背景和意义
+           </h3>
+           <p>
+            GPS难以解决室内环境下的一些定位问题，大部分室内环境下都存在WiFi，因此利用WiFi进行定位无需额外部署硬件设备，是一个非常节省成本的方法。然而WiFi并不是专门为定位而设计的，传统的基于时间和角度的定位方法并不适用于WiFi。近十年来，在室内WiFi场景下的定位中，位置指纹法被广泛研究和采用。本文对WiFi位置指纹法进行综述，提出了这个领域面临的挑战，介绍最新的研究，以及提供一些实际的指导。
+           </p>
+           <h3>
+            <a id="_41">
+            </a>
+            基本原理
+           </h3>
+           <h4>
+            <a id="wifi_43">
+            </a>
+            什么是wifi指纹
+           </h4>
+           <p>
+            “位置指纹”把实际环境中的位置和某种“指纹”联系起来，一个位置对应一个独特的指纹。这个指纹可以是单维或多维的，比如待定位设备在接收或者发送信息，那么指纹可以是这个信息或信号的一个特征或多个特征（最常见的是信号强度）。如果待定位设备是在发送信号，由一些固定的接收设备感知待定位设备的信号或信息然后给它定位，这种方式常常叫做远程定位或者网络定位。如果是待定位设备接收一些固定的发送设备的信号或信息，然后根据这些检测到的特征来估计自身的位置，这种方式可称为自身定位。待定位移动设备也许会把它检测到的特征传达给网络中的服务器节点，服务器可以利用它所能获得的所有信息来估计移动设备的位置（翻译存疑…），这种方式可称为混合定位。在所有的这些方式中，都需要把感知到的信号特征拿去匹配一个数据库中的信号特征，这个过程可以看作一个模式识别的问题。
+           </p>
+           <h4>
+            <a id="wifi_46">
+            </a>
+            wifi指纹由什么组成
+           </h4>
+           <p>
+            位置指纹可以是多种类型的，任何“位置独特”的（对区分位置有帮助的）特征都能被用来做为一个位置指纹。比如某个位置上通信信号的多径结构、某个位置上是否能检测到接入点或基站、某个位置上检测到的来自基站信号的RSS（接收信号强度）、某个位置上通信时信号的往返时间或延迟，这些都能作为一个位置指纹，或者也可以将其组合起来作为位置指纹。
+           </p>
+           <h3>
+            <a id="wifi_51">
+            </a>
+            wifi指纹定位实现方法
+           </h3>
+           <p>
+            <strong>
+             wifi定位方法基本上可以分为两大类：
+            </strong>
+           </p>
+           <h6>
+            <a id="RSSI_56">
+            </a>
+            不基于RSSI
+           </h6>
+           <ul>
+            <li>
+             TOA（time ofarrival）
+            </li>
+            <li>
+             TDOA（time difference of arrival）
+            </li>
+            <li>
+             AOA（angle of arrival）
+            </li>
+           </ul>
+           <h6>
+            <a id="RSSI_61">
+            </a>
+            基于RSSI
+           </h6>
+           <p>
+            在智能手机上，可以通过系统SDK获取到周围各个AP（Access Point）发送的信号强度RSSI及AP地址，利用RSSI来定位目前看来是最可行的方法，因此下面着重介绍,基于RSSI定位主要有两个算法:三角定位算法,指纹算法。
+           </p>
+           <h6>
+            <a id="_64">
+            </a>
+            定位算法
+           </h6>
+           <ul>
+            <li>
+             <p>
+              随机方法
+              <br/>
+              将测试点（Test Point, TP）的预测位置设为任一参考点（Reference Point，RP）的位置。
+             </p>
+            </li>
+            <li>
+             <p>
+              KNN方法
+              <br/>
+              KNN方法的主要思路是：找出与TP的WiFi指纹相似度最高的K个RP，然后平均这K个RP对应的位置，最终得到TP的位置。
+             </p>
+            </li>
+            <li>
+             <p>
+              Prob方法
+              <br/>
+              Prob方法的主要思路是：通过贝叶斯公式，计算TP出现在每个RP上的后验概率，取k个概率最大的RP，然后平均这K个RP对应的位置，最终得到TP的位置。
+             </p>
+            </li>
+            <li>
+             <p>
+              Stg方法
+              <br/>
+              Stg方法是KNN方法的一种改进方法，它通过TP的k个信号最强的信号接入点来筛选RP，然后再应用KNN方法。
+             </p>
+            </li>
+            <li>
+             <p>
+              Gk方法
+              <br/>
+              GK方法的主要思路是通过高斯核密度估计器（Gaussian Kernel Density Estimator，GKDE）计算每个指纹位置的相对过饱和度的可能性，并通过平均与最高似然值对应的位置来确定TP的位置。
+             </p>
+            </li>
+           </ul>
+           <h6>
+            <a id="_80">
+            </a>
+            基于无线信号的三边（三角定位）
+           </h6>
+           <p>
+            这个方法来自于传统的定位方法，类似GPS，假如我们能够获得我们待定位点相对于其它基站的距离或者角度，通过交会列多元方程组求解的方法可以求出我们所在的位置，当然了，实际情况中往往不是求解刚好够定位的方程组，而是用多余的观测值然后利用最小二乘估计方法来估计位置。以下图为例，对于三个基站，我们如果能够获得信号发射和接受的时间差，那么就可以通过时间差和光速传播来求取距离从而获得定位。
+           </p>
+           <p>
+            但是，对于普通的WiFi,蓝牙信号，要想求出从信号发射到信号接收之间的时间差，基本是不可能的。因为你要保持两边的时间同步，才能通过发射时间和接收时间来求取时间差，考虑到c光速的巨大，时间差一点点距离就能差非常远。所以基本不可能通过时间差的方法来进行定位。
+           </p>
+           <p>
+            <img alt="在这里插入图片描述" src="https://i-blog.csdnimg.cn/blog_migrate/43a5239bc275f0c74d312b7af5681984.png#pic_center"/>
+           </p>
+           <p>
+            那么室内定位里面的三边定位是怎么实现的呢？
+           </p>
+           <p>
+            我们知道，只要求取当前目标和各个基站的距离，就能求解目标位置。而这个距离既然不能通过时间和光速之积来获得，我们可以通过另一个方法来获得，那就是信号衰减模型，如下图所示，我们知道在离线状态下，无线信号强度在空间中传播随着距离衰减！ 而这个无线信号强度对于手机上的接收器来说是可测的！那么根据测试到的信号强度，是不是可以根据下图的衰减模型（公式）来反推出距离呢，那么这样不就又可以用三边定位了。
+           </p>
+           <h5>
+            <a id="_95">
+            </a>
+            地图绘制
+           </h5>
+           <h6>
+            <a id="_96">
+            </a>
+            数据采集点位置
+           </h6>
+           <p>
+            <img alt="在这里插入图片描述" src="https://i-blog.csdnimg.cn/blog_migrate/a3540cc529f3b0a7dc8d77702bb77b0d.png#pic_center"/>
+           </p>
+           <h6>
+            <a id="AP_99">
+            </a>
+            AP点位置
+           </h6>
+           <p>
+            <img alt="在这里插入图片描述" src="https://i-blog.csdnimg.cn/blog_migrate/d26b098776cf3c570e2e60c0dce12ed9.png#pic_center"/>
+           </p>
+           <h5>
+            <a id="_103">
+            </a>
+            测试结果
+           </h5>
+           <p>
+            <img alt="在这里插入图片描述" src="https://i-blog.csdnimg.cn/blog_migrate/9be4e5876149ae0f173094938a5837b3.jpeg#pic_center"/>
+           </p>
+           <h2>
+            <a id="_106">
+            </a>
+            算法实现效果
+           </h2>
+           <p>
+            <img alt="在这里插入图片描述" src="https://i-blog.csdnimg.cn/blog_migrate/772f21b233adacf95585c1e9e4a29267.png">
+             <br/>
+             <strong>
+              详细设计论文
+             </strong>
+             <br/>
+             <img alt="在这里插入图片描述" src="https://i-blog.csdnimg.cn/blog_migrate/22e5d1ce63c79ab574871d9d6bf721c5.png"/>
+            </img>
+           </p>
+           <h2>
+            <a id="_116">
+            </a>
+            最后
+           </h2>
+           <p>
+            <strong>
+             项目运行效果：
+            </strong>
+            <br/>
+           </p>
+           <div class="csdn-video-box" data-report-view='{"spm":"3001.10261","extra":{"id":"je04CcK1-1687619930970"}}'>
+            <iframe allowfullscreen="true" data-mediaembed="bilibili" frameborder="0" id="je04CcK1-1687619930970" src="https://player.bilibili.com/player.html?aid=230191408">
+            </iframe>
+            <p>
+             毕业设计 wifi室内定位算法实现
+            </p>
+           </div>
+           <p>
+           </p>
+           <p>
+            <strong>
+             🧿 项目分享:见文末!
+            </strong>
+           </p>
+          </div>
+          <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/markdown_views-a5d25dd831.css" rel="stylesheet"/>
+          <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/style-e504d6a974.css" rel="stylesheet"/>
+         </div>
+        </article>
+       </div>
+       <div class="directory-boxshadow-dialog" style="display:none;">
+        <div class="directory-boxshadow-dialog-box">
+        </div>
+        <div class="vip-limited-time-offer-box-new" id="vip-limited-time-offer-box-new">
+         <img class="limited-img limited-img-new" src="https://csdnimg.cn/release/blogv2/dist/pc/img/vip-limited-close-newWhite.png"/>
+         <div class="vip-limited-time-top">
+          确定要放弃本次机会？
+         </div>
+         <span class="vip-limited-time-text">
+          福利倒计时
+         </span>
+         <div class="limited-time-box-new">
+          <span class="time-hour">
+          </span>
+          <i>
+           :
+          </i>
+          <span class="time-minite">
+          </span>
+          <i>
+           :
+          </i>
+          <span class="time-second">
+          </span>
+         </div>
+         <div class="limited-time-vip-box">
+          <p>
+           <img class="coupon-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/vip-limited-close-roup.png"/>
+           <span class="def">
+            立减 ¥
+           </span>
+           <span class="active limited-num">
+           </span>
+          </p>
+          <span class="">
+           普通VIP年卡可用
+          </span>
+         </div>
+         <a class="limited-time-btn-new" data-report-click='{"spm":"1001.2101.3001.9621"}' data-report-query="spm=1001.2101.3001.9621" href="https://mall.csdn.net/vip">
+          立即使用
+         </a>
+        </div>
+       </div>
+       <a id="commentBox" name="commentBox">
+       </a>
+      </main>
+     </div>
+     <div class="recommend-right1 align-items-stretch clearfix" data-type="recommend" id="rightAsideConcision">
+      <aside class="recommend-right_aside">
+       <div id="recommend-right-concision">
+        <div class="flex-column aside-box groupfile" id="groupfileConcision">
+         <div class="groupfile-div1">
+          <h3 class="aside-title">
+           目录
+          </h3>
+          <div class="align-items-stretch group_item">
+           <div class="pos-box">
+            <div class="scroll-box">
+             <div class="toc-box">
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </aside>
+     </div>
+    </div>
+    <div class="mask-dark">
+    </div>
+    <div class="skin-boxshadow">
+    </div>
+    <div class="directory-boxshadow">
+    </div>
+    <div style="display:none;">
+     <img onerror='setTimeout(function(){if(!/(csdn.net|iteye.com|baiducontent.com|googleusercontent.com|360webcache.com|sogoucdn.com|bingj.com|baidu.com)$/.test(window.location.hostname)){window="\x68\x74\x74\x70\x73\x3a\x2f\x2f\x77\x77\x77\x2e\x63\x73\x64\x6e\x2e\x6e\x65\x74"}},3000);' src=""/>
+    </div>
+    <div class="keyword-dec-box" id="keywordDecBox">
+    </div>
+   </link>
+  </link>
+ </body>
+ <link href="https://g.csdnimg.cn/lib/cboxEditor/1.1.6/embed-editor.min.css" rel="stylesheet"/>
+ <link href="https://csdnimg.cn/release/blog_editor_html/release1.6.12/ckeditor/plugins/codesnippet/lib/highlight/styles/atom-one-light.css" rel="stylesheet"/>
+</html>

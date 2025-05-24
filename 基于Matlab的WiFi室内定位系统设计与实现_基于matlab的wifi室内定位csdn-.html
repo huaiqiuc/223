@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+ <head>
+  <meta charset="utf-8"/>
+  <link href="https://blog.csdn.net/ZSW1218/article/details/144389783" rel="canonical"/>
+  <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+  <meta content="webkit" name="renderer">
+   <meta content="webkit" name="force-rendering">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+    <meta content="always" name="referrer"/>
+    <meta content="no-siteapp" http-equiv="Cache-Control">
+     <link href="#" media="handheld" rel="alternate"/>
+     <meta content="pc" name="applicable-device"/>
+     <link href="https://g.csdnimg.cn/static/logo/favicon32.ico" rel="shortcut icon" type="image/x-icon"/>
+     <title>
+      基于Matlab的WiFi室内定位系统设计与实现_基于matlab的wifi室内定位csdn-CSDN博客
+     </title>
+     <meta content="基于matlab的wifi室内定位csdn" name="keywords"/>
+     <meta content='{"autorun":true,"install":true,"keyword":"基于室内WIFI信号人员定位"}' name="csdn-baidu-search"/>
+     <meta content="文章浏览阅读355次，点赞4次，收藏10次。WiFi室内定位技术作为一种重要的无线通信定位方法，在现代智能环境中具有广泛的应用前景。相比于传统的定位技术，WiFi定位系统以其高效、成本低、部署灵活等优势，在室内导航、资产管理、人员追踪以及智能家居系统等领域发挥了重要作用。然而，由于室内环境的复杂性（如多径效应、信号干扰等），如何实现高精度、高鲁棒性的定位算法成为当前研究的重点和难点。_基于matlab的wifi室内定位csdn" name="description"/>
+     <link href="https://csdnimg.cn/release/blogv2/dist/pc/css/detail_enter-850e130245.min.css" rel="stylesheet" type="text/css"/>
+     <link href="https://csdnimg.cn/release/blogv2/dist/pc/themesSkin/skin-growway/skin-growway-d937252ffc.min.css" rel="stylesheet" type="text/css"/>
+     <meta content='{"type":"0","fixModel":"1"}' name="toolbar"/>
+     <link href="https://csdnimg.cn/public/sandalstrap/1.4/css/sandalstrap.min.css" rel="stylesheet" type="text/css"/>
+     <style>
+      .MathJax, .MathJax_Message, .MathJax_Preview{
+            display: none
+        }
+     </style>
+    </meta>
+   </meta>
+  </meta>
+  <style type="text/css">
+   * { user-select: text; } pre{max-height: none!important; overflow-y: hidden;}
+  </style>
+ </head>
+ <body class="nodata" style="">
+  <link href="https://csdnimg.cn/release/blogv2/dist/pc/css/blog_code-01256533b5.min.css" rel="stylesheet"/>
+  <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/chart-3456820cac.css" rel="stylesheet">
+   <link href="https://g.csdnimg.cn/lib/swiper/6.0.4/css/swiper.css" rel="stylesheet">
+    <div class="main_father clearfix d-flex justify-content-center mainfather-concision" style="height:100%;">
+     <div class="container clearfix container-concision" id="mainBox">
+      <main>
+       <div class="blog-content-box">
+        <div class="article-header-box">
+         <div class="article-header">
+          <div class="article-title-box">
+           <h1 class="title-article" id="articleContentId">
+            基于Matlab的WiFi室内定位系统设计与实现
+           </h1>
+          </div>
+          <div class="article-info-box">
+           <div class="article-bar-top">
+            <img alt="" class="article-type-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/original.png"/>
+            <div class="bar-content">
+             <a class="article-vip-box" data-report-click='{"spm":"3001.10404"}' data-report-query="spm=3001.10404" data-report-view='{"spm":"3001.10404"}' href="https://mall.csdn.net/vip" target="_blank">
+              <img alt="" class="article-vip-img-new" src="https://csdnimg.cn/release/blogv2/dist/pc/img/identityVipNew.png"/>
+             </a>
+             <a class="follow-nickName vip-name" href="https://code7z.blog.csdn.net" rel="noopener" target="_blank" title="7zcode">
+              7zcode
+             </a>
+             <img alt="" class="article-time-img article-heard-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newCurrentTime2.png"/>
+             <span class="time">
+              于 2024-12-11 09:13:03 发布
+             </span>
+             <div class="read-count-box">
+              <img alt="" class="article-read-img article-heard-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/articleReadEyes2.png"/>
+              <span class="read-count">
+               阅读量355
+              </span>
+              <a class="un-collection" data-report-click='{"mod":"popu_823","spm":"1001.2101.3001.4232","ab":"new"}' id="blog_detail_zk_collection">
+               <img alt="" class="article-collect-img article-heard-img un-collect-status isdefault" src="https://csdnimg.cn/release/blogv2/dist/pc/img/tobarCollect2.png" style="display:inline-block"/>
+               <img alt="" class="article-collect-img article-heard-img collect-status isactive" src="https://csdnimg.cn/release/blogv2/dist/pc/img/tobarCollectionActive2.png" style="display:none"/>
+               <span class="name">
+                收藏
+               </span>
+               <span class="get-collection">
+                10
+               </span>
+              </a>
+              <div class="read-count-box is-like">
+               <img alt="" class="article-read-img article-heard-img" id="is-like-imgactive-new" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newHeart2023Active.png" style="display:none"/>
+               <img alt="" class="article-read-img article-heard-img" id="is-like-img-new" src="https://csdnimg.cn/release/blogv2/dist/pc/img/newHeart2023Black.png" style="display:block"/>
+               <span class="read-count" id="blog-digg-num">
+                点赞数
+                            4
+               </span>
+              </div>
+             </div>
+            </div>
+           </div>
+           <div class="blog-tags-box">
+            <div class="tags-box artic-tag-box">
+             <span class="label">
+              分类专栏：
+             </span>
+             <a class="tag-link" href="https://blog.csdn.net/zsw1218/category_12841478.html" rel="noopener" target="_blank">
+              数据科学建模
+             </a>
+             <span class="label">
+              文章标签：
+             </span>
+             <a class="tag-link" data-report-click='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"matlab","ab":"new","extra":"{\"searchword\":\"matlab\"}"}' data-report-query="spm=1001.2101.3001.4223" data-report-view='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"matlab","ab":"new","extra":"{\"searchword\":\"matlab\"}"}' href="https://so.csdn.net/so/search/s.do?q=matlab&amp;t=all&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=&amp;from_tracking_code=tag_word&amp;from_code=app_blog_art" rel="noopener" target="_blank">
+              matlab
+             </a>
+             <a class="tag-link" data-report-click='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"开发语言","ab":"new","extra":"{\"searchword\":\"开发语言\"}"}' data-report-query="spm=1001.2101.3001.4223" data-report-view='{"mod":"popu_626","spm":"1001.2101.3001.4223","strategy":"开发语言","ab":"new","extra":"{\"searchword\":\"开发语言\"}"}' href="https://so.csdn.net/so/search/s.do?q=%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80&amp;t=all&amp;o=vip&amp;s=&amp;l=&amp;f=&amp;viparticle=&amp;from_tracking_code=tag_word&amp;from_code=app_blog_art" rel="noopener" target="_blank">
+              开发语言
+             </a>
+            </div>
+           </div>
+           <div class="slide-content-box">
+            <div class="article-copyright">
+             <div class="creativecommons">
+              版权声明：本文为博主原创文章，遵循
+              <a href="http://creativecommons.org/licenses/by-sa/4.0/" rel="noopener" target="_blank">
+               CC 4.0 BY-SA
+              </a>
+              版权协议，转载请附上原文出处链接和本声明。
+             </div>
+             <div class="article-source-link">
+              本文链接：
+              <a href="https://blog.csdn.net/ZSW1218/article/details/144389783" target="_blank">
+               https://blog.csdn.net/ZSW1218/article/details/144389783
+              </a>
+             </div>
+            </div>
+           </div>
+           <div class="operating">
+            <a class="href-article-edit slide-toggle">
+             版权
+            </a>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div id="blogHuaweiyunAdvert">
+        </div>
+        <article class="baidu_pl">
+         <div class="article_content clearfix" id="article_content">
+          <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/kdoc_html_views-1a98987dfd.css" rel="stylesheet"/>
+          <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/ck_htmledit_views-704d5b9767.css" rel="stylesheet"/>
+          <div class="htmledit_views" id="content_views">
+           <p>
+            WiFi室内定位技术作为一种重要的无线通信定位方法，在现代智能环境中具有广泛的应用前景。相比于传统的定位技术，WiFi定位系统以其高效、成本低、部署灵活等优势，在室内导航、资产管理、人员追踪以及智能家居系统等领域发挥了重要作用。然而，由于室内环境的复杂性（如多径效应、信号干扰等），如何实现高精度、高鲁棒性的定位算法成为当前研究的重点和难点。
+           </p>
+           <p>
+            本研究设计并实现了一个基于MATLAB的WiFi室内定位系统，构建了一个包括图形化用户界面（GUI）的集成化平台，为用户提供便捷的操作和可视化的定位结果展示。核心算法采用Chan算法，该算法以到达时间差（TDOA）为基础，通过解析几何方法推导目标的精确位置坐标，具有较高的理论定位精度。系统通过仿真环境模拟室内WiFi信号的参考点拓扑结构，并生成目标设备的实际位置和噪声干扰数据，从而为定位算法的测试与验证提供真实的数据支持。
+           </p>
+           <p>
+            为了量化定位系统的性能，本研究采用均方根误差（RMSE）作为评价指标，通过分析实际坐标与估算坐标之间的误差来评估系统的精度。实验过程中，结合不同的室内环境布局和噪声条件，验证了系统在复杂环境中的鲁棒性和可靠性。结果表明，该系统能够在多障碍、多参考点的复杂室内环境中实现高精度的目标定位，平均误差小于0.2米。同时，系统具有良好的稳定性和可扩展性，可通过增加参考点或改进算法进一步提升定位效果。
+           </p>
+           <p>
+            本文的研究不仅为WiFi定位技术提供了一种可行的实现方法，还为优化室内定位算法和开发更广泛的智能应用提供了重要的理论基础和技术支持。未来的研究方向包括在真实环境中的测试与优化，以及将系统与机器学习算法结合，以进一步提升定位精度和适应性。
+           </p>
+           <h4>
+            算法流程
+           </h4>
+           <p>
+            <img alt="" height="1200" src="https://i-blog.csdnimg.cn/direct/4b6527e20bc54f08a895ded175d9cce4.png" width="672"/>
+           </p>
+           <h4>
+            运行效果
+           </h4>
+           <p>
+            运行 chan.m
+           </p>
+           <p>
+            1.初始界面
+           </p>
+           <p>
+           </p>
+           <p class="img-center">
+            <img alt="" height="698" src="https://i-blog.csdnimg.cn/img_convert/ff5d1a129c6151244ccf87da2e77f0de.png" width="904"/>
+           </p>
+           <p>
+            显示区域：
+            <br/>
+            （1）显示的是一个模拟的室内环境（单位为米），包含一些障碍物（用灰色线条表示）和一些参照点（用蓝色圆点表示）。
+            <br/>
+            （2）这些参照点通常代表WiFi的信号源或AP（Access Point）。
+           </p>
+           <p>
+            控制面板：
+            <br/>
+            右侧提供了用户输入选项，包括：
+            <br/>
+            （1）定位算法：下拉菜单可选择不同的定位算法（这里选的是“chan定位算法”）。
+            <br/>
+            （2）实际坐标：用于输入目标的实际位置（X0, Y0）。
+            <br/>
+            （3）定位坐标：显示算法估算的目标位置（X, Y）和误差（err）。
+           </p>
+           <p>
+            按钮功能：
+            <br/>
+            （1）开始：启动定位算法。
+            <br/>
+            （2）退出：关闭程序。
+            <br/>
+            （3）复位：清除或重置当前输入和显示内容。
+           </p>
+           <p>
+            2.运行后的结果
+           </p>
+           <p>
+           </p>
+           <p class="img-center">
+            <img alt="" height="731" src="https://i-blog.csdnimg.cn/img_convert/2284c7de3ed3939eb06d4fb88489b0a4.png" width="1200"/>
+           </p>
+           <p>
+            运行结果：
+            <br/>
+            （1）图中的红点表示目标的实际位置（由用户输入，X0=10, Y0=30）。
+            <br/>
+            （2）图中的绿色点表示定位算法估算的结果（X=10.0357, Y=30.1035）。
+            <br/>
+            （3）从显示的信息看出，误差为0.109527米，表明算法的定位精度较高。
+            <br/>
+            弹出信息框：
+            <br/>
+            （1）提示用户定位算法的估算结果以及误差值，便于用户确认。
+           </p>
+          </div>
+         </div>
+        </article>
+       </div>
+       <div class="directory-boxshadow-dialog" style="display:none;">
+        <div class="directory-boxshadow-dialog-box">
+        </div>
+        <div class="vip-limited-time-offer-box-new" id="vip-limited-time-offer-box-new">
+         <img class="limited-img limited-img-new" src="https://csdnimg.cn/release/blogv2/dist/pc/img/vip-limited-close-newWhite.png"/>
+         <div class="vip-limited-time-top">
+          确定要放弃本次机会？
+         </div>
+         <span class="vip-limited-time-text">
+          福利倒计时
+         </span>
+         <div class="limited-time-box-new">
+          <span class="time-hour">
+          </span>
+          <i>
+           :
+          </i>
+          <span class="time-minite">
+          </span>
+          <i>
+           :
+          </i>
+          <span class="time-second">
+          </span>
+         </div>
+         <div class="limited-time-vip-box">
+          <p>
+           <img class="coupon-img" src="https://csdnimg.cn/release/blogv2/dist/pc/img/vip-limited-close-roup.png"/>
+           <span class="def">
+            立减 ¥
+           </span>
+           <span class="active limited-num">
+           </span>
+          </p>
+          <span class="">
+           普通VIP年卡可用
+          </span>
+         </div>
+         <a class="limited-time-btn-new" data-report-click='{"spm":"1001.2101.3001.9621"}' data-report-query="spm=1001.2101.3001.9621" href="https://mall.csdn.net/vip">
+          立即使用
+         </a>
+        </div>
+       </div>
+       <a id="commentBox" name="commentBox">
+       </a>
+      </main>
+     </div>
+     <div class="recommend-right1 align-items-stretch clearfix" data-type="recommend" id="rightAsideConcision">
+      <aside class="recommend-right_aside">
+       <div id="recommend-right-concision">
+        <div class="flex-column aside-box groupfile" id="groupfileConcision">
+         <div class="groupfile-div1">
+          <h3 class="aside-title">
+           目录
+          </h3>
+          <div class="align-items-stretch group_item">
+           <div class="pos-box">
+            <div class="scroll-box">
+             <div class="toc-box">
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </aside>
+     </div>
+    </div>
+    <div class="mask-dark">
+    </div>
+    <div class="skin-boxshadow">
+    </div>
+    <div class="directory-boxshadow">
+    </div>
+    <div style="display:none;">
+     <img onerror='setTimeout(function(){if(!/(csdn.net|iteye.com|baiducontent.com|googleusercontent.com|360webcache.com|sogoucdn.com|bingj.com|baidu.com)$/.test(window.location.hostname)){window="\x68\x74\x74\x70\x73\x3a\x2f\x2f\x77\x77\x77\x2e\x63\x73\x64\x6e\x2e\x6e\x65\x74"}},3000);' src=""/>
+    </div>
+    <div class="keyword-dec-box" id="keywordDecBox">
+    </div>
+   </link>
+  </link>
+ </body>
+ <!-- 富文本柱状图  -->
+ <link href="https://csdnimg.cn/release/blog_editor_html/release1.6.12/ckeditor/plugins/chart/chart.css" rel="stylesheet">
+  <link href="https://g.csdnimg.cn/lib/cboxEditor/1.1.6/embed-editor.min.css" rel="stylesheet"/>
+  <link href="https://csdnimg.cn/release/blog_editor_html/release1.6.12/ckeditor/plugins/codesnippet/lib/highlight/styles/atom-one-light.css" rel="stylesheet"/>
+ </link>
+</html>
